@@ -18,7 +18,7 @@ class Room(CoreModel):
     user = models.ForeignKey(
         "users.User", on_delete=models.CASCADE, related_name="rooms"
     )
-
+    # 참조해준 객체입장에서 related_name 설정!
     def __str__(self):
         return self.name
 
@@ -38,3 +38,5 @@ class Photo(CoreModel):
 
     def __str__(self):
         return self.room.name
+
+# (core_model)-> user -> room -> photo
