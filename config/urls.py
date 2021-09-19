@@ -8,5 +8,7 @@ urlpatterns = [
     path("api/v1/rooms/",include("rooms.urls")),
 ]
 
+#validated_data
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
