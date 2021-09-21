@@ -43,21 +43,21 @@ class RoomView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
 
-    def put(self,request,pk):
+    def put(self, request, pk):
         room = self.get_room(pk)
         if room is not None:
             if room.user != request.user:
-                #print(room.user,request.user)
                 return Response(status=status.HTTP_403_FORBIDDEN)
-            serializer = WriteRoomSerializer(room,data=request.data,partial=True)
+            serializer = WriteRoomSerializer(room, data=request.data, partial=True)
             if serializer.is_valid():
-                room = serializer.save() #serializer 의 update 를 call 함
+                room = serializer.save()
                 return Response(ReadRoomSerializer(room).data)
             else:
-                return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response()
         else:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
 
     def delete(self,request,pk):
         room = self.get_room(pk)
