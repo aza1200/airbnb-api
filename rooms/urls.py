@@ -6,10 +6,6 @@ from . import views
 
 app_name = "rooms"
 
-# router = DefaultRouter()
-# router.register("",viewsets.RoomViewset,basename='room')
-
-#urlpatterns =router.urls
 
 urlpatterns = [
     path("",views.RoomsVIew.as_view()),
