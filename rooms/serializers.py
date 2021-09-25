@@ -6,11 +6,13 @@ from users.serializers import UserSerializer
 class RoomSerializer(serializers.ModelSerializer):
 
     user = UserSerializer()
+    is_fav = serializers.SerializerMethodField()
 
     class Meta:
         model = Room
         exclude = ("modified",)
         read_only_fields = ('user','id','created','updated')
+
 
     def validate(self,data):
         if self.instance:
@@ -22,3 +24,13 @@ class RoomSerializer(serializers.ModelSerializer):
         if check_in == check_out:
             raise serializers.ValidationError("Not engough time between changes")
         return data
+
+    def get_is_fav(self,obj):
+        request = self.context.get('request')
+        print(request)
+        if request:
+            user = request.user
+            print(user)
+            if user.is_authenticated:
+                return obj in user.favs.all()
+        return False
