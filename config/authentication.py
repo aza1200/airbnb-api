@@ -1,3 +1,4 @@
+
 import jwt
 from django.conf import settings
 from users.models import User
@@ -6,7 +7,7 @@ from rest_framework import authentication
 class JWTAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         try:
-            token = request.META.get("HTTP_AUTHORIZATION")
+            token = request.META.get("HTTP_AUTHORIZATION")#WSGIPassAuthorization On
             if token is None:
                 return None
             xjwt,jwt_token = token.split(" ")

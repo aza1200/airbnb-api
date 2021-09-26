@@ -146,3 +146,8 @@ REST_FRAMEWORK = {
     ]
 
 }
+
+# if DEBUG:
+#     REST_FRAMEWORK["DEFAULT_RENDERER CLASSES"] = [
+#         "rest_framework.renderers.JSONRenderer",
+#     ]
